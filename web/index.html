@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>real-time-forum</title>
+    <link rel="icon" href="assets/favicon-icon-13.jpg" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+
+  <body>
+    <!-- Header (navigation, authentication) -->
+    <div id="header">
+      <div id="auth-in" hidden>
+        <div id="auth-in-container">
+          <div id="link-home">🏠 to forum</div>
+          <div id="link-chat">📭 to chat</div>
+          <div id="auth-in-user-info"></div>
+          <button id="button-logout" type="button">Log out</button>
+        </div>
+      </div>
+      <div id="auth-out" hidden>
+        <div id="auth-out-container">
+          <button id="button-login" type="button">Log in</button>
+          <button id="button-signup" type="button">Sign up</button>
+        </div>
+      </div>
+    </div>
+    <!-- Pages' content -->
+    <div id="content">
+          <!-- Messages view -->
+      <div id="view-users" hidden></div>
+      <div id="view-chat" hidden>
+        <div id="view-messages">
+          <div id="view-messages-container">
+            <div id="messages"></div>
+            <div id="message-typing">
+              <div id="typing-container">
+                <img src="assets/typing.svg" alt="" />
+                <div id="message-typing-text"></div>
+              </div>
+            </div>
+            <form id="message-form">
+              <input type="text" name="message-text" id="message-text" />
+              <button type="submit" id="message-submit">Send</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- Sign up view -->
+      <form id="view-signup" hidden>
+        <div id="view-signup-container">
+          <div id="view-signup-credentials">
+            <input
+              title="2-15 english letters/numbers."
+              type="text"
+              name="signup-user"
+              id="signup-user"
+              placeholder="nickname"
+              pattern="[a-zA-Z0-9]{2,15}"
+              required
+              oninvalid="this.setCustomValidity('Please enter a valid nickname with 2-15 English letters/numbers.')"
+              onchange="this.setCustomValidity('')"
+            />
+            <input
+              title="1-155 years young.
+No leading 0s allowed"
+              type="number"
+              name="signup-age"
+              id="signup-age"
+              placeholder="Age"
+              min="1" max="155"
+              required
+              oninvalid="this.setCustomValidity('Be between 1 year to 155 years young. No leading 0s allowed')"
+              onchange="this.setCustomValidity('')"
+            />
+            <select
+              title="Default: 'No Gender'"
+              name="signup-gender"
+              name="signup-gender"
+              id="signup-gender"
+            >
+              <option value="undefined" selected="selected">No Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+            <input
+              title="1-32 english letters/numbers."
+              type="text"
+              name="signup-firstname"
+              id="signup-firstname"
+              placeholder="First name"
+              pattern="[a-zA-Z0-9]{1,32}"
+              required
+              oninvalid="this.setCustomValidity('Please enter 1-32 english letters/numbers.')"
+              onchange="this.setCustomValidity('')"
+            />
+            <input
+              title="1-32 english letters/numbers."
+              type="text"
+              name="signup-lastname"
+              id="signup-lastname"
+              placeholder="Last name"
+              pattern="[a-zA-Z0-9]{1,32}"
+              required
+              oninvalid="this.setCustomValidity('Please enter 1-32 english letters/numbers.')"
+              onchange="this.setCustomValidity('')"
+            />
+            <input
+              title="Please enter a valid email.
+Leading and trailing spaces will be removed."
+              type="email"
+              name="signup-email"
+              id="signup-email"
+              placeholder="email"
+              required
+              oninvalid="this.setCustomValidity('Please enter a valid email.')"
+              onchange="this.setCustomValidity('')"
+            />
+            <input
+              title="6-15 english letters/numbers."
+              type="password"
+              name="signup-password"
+              id="signup-password"
+              placeholder="password"
+              pattern="[a-zA-Z0-9]{6,15}"
+              required
+              oninvalid="this.setCustomValidity('Please enter 6-15 english letters/numbers.')"
+              onchange="this.setCustomValidity('')"
+            />
+          </div>
+          <div id="view-signup-button">
+            <button type="submit" id="signup-submit">Sign up</button>
+          </div>
+        </div>
+      </form>
+      <!-- Log in view -->
+      <form id="view-login" hidden>
+        <div id="view-login-container">
+          <div id="view-login-credentials">
+            <input
+              type="text"
+              name="login-user"
+              id="login-user"
+              placeholder="nickname or email"
+            />
+            <input
+              type="password"
+              name="login-password"
+              id="login-password"
+              placeholder="password"
+            />
+          </div>
+          <div id="view-login-button">
+            <button type="submit" id="login-submit">Log in</button>
+          </div>
+        </div>
+      </form>
+      <!-- Posts view -->
+      <div id="view-posts" hidden>
+        <form id="view-newpost">
+          <div id="view-newpost-container">
+            <div id="view-newpost-inputs">
+              <input
+                type="text"
+                name="newpost-title"
+                id="newpost-title"
+                placeholder="Post title"
+              />
+              <input
+                type="text"
+                name="newpost-categories"
+                id="newpost-categories"
+                placeholder="Categories (comma separated)"
+              />
+              <textarea
+                type="text"
+                name="newpost-text"
+                id="newpost-text"
+                placeholder="Post text"
+              ></textarea>
+            </div>
+            <div id="view-newpost-button">
+              <button type="submit" id="newpost-submit">Create post</button>
+            </div>
+          </div>
+        </form>
+        <div id="posts"></div>
+      </div>
+      <!-- Post view -->
+      <div id="view-post" hidden>
+        <div id="view-post-post"></div>
+        <form id="comment-form">
+          <div id="comment-form-container">
+            <textarea
+              type="text"
+              name="comment-text"
+              id="comment-text"
+              placeholder="Write your comment here"
+            ></textarea>
+            <button type="submit" id="comment-submit">SUBMIT</button>
+          </div>
+        </form>
+
+        <div id="comments"></div>
+      </div>
+
+      <!-- User profile view -->
+      <div id="view-profile" hidden></div>
+    </div>
+
+    <!-- Alerts -->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="modal-close">&times;</span>
+      </div>
+    </div>
+    <!-- Forum script -->
+    <script type="module" src="./src/index.js"></script>
+  </body>
+</html>

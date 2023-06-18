@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+
+# goland and other jetbrains products
+.idea
+
+# vscode
+.vscode
+
+# node
+.env.sh
+
+# vim
+.vimrc
+*~
+*.swp
+*.swo
+
+# project specific
+*.db
